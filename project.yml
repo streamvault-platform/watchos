@@ -1,0 +1,41 @@
+name: StreamvaultWatch
+options:
+  bundleIdPrefix: io.streamvault
+  createIntermediateGroups: true
+  defaultConfig: Debug
+
+configs:
+  Debug: debug
+  Release: release
+
+targets:
+  StreamvaultWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "9.0"
+    info:
+      path: StreamvaultWatch/Info.plist
+      properties:
+        CFBundleDisplayName: Streamvault
+        WKApplication: true
+        UIBackgroundModes:
+          - audio
+    sources:
+      - path: StreamvaultWatch
+        createIntermediateGroups: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.streamvault.watch
+        SWIFT_VERSION: "5.10"
+        TARGETED_DEVICE_FAMILY: "4"
+        WATCHOS_DEPLOYMENT_TARGET: "9.0"
+        ENABLE_PREVIEWS: "YES"
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: "YES"
+      configs:
+        Debug:
+          DEBUG_INFORMATION_FORMAT: dwarf
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
+          VALIDATE_PRODUCT: "YES"
