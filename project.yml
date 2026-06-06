@@ -39,3 +39,35 @@ targets:
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
           SWIFT_OPTIMIZATION_LEVEL: "-O"
           VALIDATE_PRODUCT: "YES"
+
+  StreamvaultWatchTests:
+    type: bundle.unit-test
+    platform: watchOS
+    deploymentTarget: "9.0"
+    sources:
+      - path: StreamvaultWatchTests
+        createIntermediateGroups: true
+    dependencies:
+      - target: StreamvaultWatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.streamvault.watch.tests
+        SWIFT_VERSION: "5.10"
+        WATCHOS_DEPLOYMENT_TARGET: "9.0"
+
+schemes:
+  StreamvaultWatch:
+    build:
+      targets:
+        StreamvaultWatch: all
+        StreamvaultWatchTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - name: StreamvaultWatchTests
+          parallelizable: true
+          randomExecutionOrder: true
+    archive:
+      config: Release

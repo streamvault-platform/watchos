@@ -5,7 +5,7 @@ struct LoginRequest: Encodable {
     let password: String
 }
 
-struct TokenResponse: Decodable {
+struct TokenResponse: Codable {
     let accessToken: String
     let refreshToken: String
 }
