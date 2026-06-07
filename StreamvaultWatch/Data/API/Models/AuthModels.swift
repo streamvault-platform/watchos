@@ -1,11 +1,11 @@
 import Foundation
 
-struct LoginRequest: Encodable {
+struct LoginRequest: Codable {
     let username: String
     let password: String
 }
 
-struct TokenResponse: Decodable {
+struct TokenResponse: Codable {
     let accessToken: String
     let refreshToken: String
 }
