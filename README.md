@@ -24,7 +24,7 @@ StreamvaultWatch/
   App/          ← entry point + dependency wiring
   Navigation/   ← root navigation view
   Auth/         ← login screen, JWT keychain storage
-  Library/      ← browse artists → albums → tracks
+  Library/      ← browse artists → albums → tracksöö
   Sync/         ← download tracks to watch storage
   Player/       ← offline playback via AVPlayer + Now Playing
   Data/

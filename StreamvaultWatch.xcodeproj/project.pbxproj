@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07A5B01A7194942A05C4A89A /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E095A5263A6EBE07F3FA8 /* AuthViewModel.swift */; };
+		09A2E970990CE7E8DE4F4476 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2D265819C8B4D7312C5D7 /* SyncManager.swift */; };
+		15FAF967C3316909F0BBE40B /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C049B73D51CC7720B8B7AC1 /* SyncView.swift */; };
+		1A8606EA629B9E26147D0FAD /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FCC1CAFC951BE37AE8525 /* PlayerView.swift */; };
+		1D016B829566C496559065CC /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135EE216956EEB993ED1AB5 /* LibraryViewModel.swift */; };
+		358F3371639916F42763169C /* InMemoryKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8526BADB5D7C726BB8424C /* InMemoryKeychain.swift */; };
+		51661693146F0C67EA42EAB6 /* SyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B95D7D2C59F076EA828BD18 /* SyncViewModel.swift */; };
+		57621DC2642FAF1B77EE3616 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A488F422B2BD6334681022F8 /* AuthView.swift */; };
+		6BF9058BB88BA03D8BFA2BEE /* ArtistListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A06649924CF6FF5735419F3 /* ArtistListView.swift */; };
+		73C66B3053DE8FBD3C1FF960 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5DD117F63E56B764A1D23A /* TokenRepository.swift */; };
+		7BF8E3C09CD1340EF4F12002 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97E548F336ADACE11C1DF1 /* AuthModels.swift */; };
+		888731F01FC3D1FBB6A6156F /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAACCEDBA663FF228DB7F2A /* PlayerViewModel.swift */; };
+		91350958CDA6588988F1B8CB /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E459397E94B238C37120F49 /* AuthViewModelTests.swift */; };
+		928DF0CDB3C07E8923E27A17 /* TrackStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66847AB50426D407ED657416 /* TrackStore.swift */; };
+		954DB758EE3E5098AA764D10 /* LibraryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901FEE2A427540C654BDED09 /* LibraryModels.swift */; };
+		9C0D6D1E5197DB38F5B08E61 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790DDC0B52304DAFEEF72C2 /* APIClientTests.swift */; };
+		A26D4D5B8D343346DAA85328 /* AlbumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF48C8609A2E0E5BC663614 /* AlbumListView.swift */; };
+		BBB8E9880D5E171381C9248A /* StreamvaultWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92045EE011A1FD2753509703 /* StreamvaultWatchApp.swift */; };
+		C4A1D626C54C57E123062810 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72093AC6954CD8FFD05F59F /* APIClient.swift */; };
+		C8A2FE537C1C76CC3195B365 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */; };
+		E5610059B8A6FB99DBB5F729 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E51D87F204FEB173B11E8 /* KeychainStorage.swift */; };
+		E9F440E6AE6BBC0B62F47A53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84955DFB236FD4A0C45803 /* ContentView.swift */; };
+		EF13A5B6447E0EC445C93579 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A77C1457CD4B6E7F86323E /* PlaybackManager.swift */; };
+		F73313CFCFFCD81BFD5C47F5 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3798A5CB70A5EFA09F4E53A /* TrackListView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		257E93CD8016CBFAD38C96BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BA5209EEF773A97F7F74C65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A61D887E41F948C82C011CA3;
+			remoteInfo = StreamvaultWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		141E095A5263A6EBE07F3FA8 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		1790DDC0B52304DAFEEF72C2 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		1A0BEA56D46A0FDD6EB1F41A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1E459397E94B238C37120F49 /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		1F97E548F336ADACE11C1DF1 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		2135EE216956EEB993ED1AB5 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		2B95D7D2C59F076EA828BD18 /* SyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewModel.swift; sourceTree = "<group>"; };
+		4DA2D265819C8B4D7312C5D7 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		5CF48C8609A2E0E5BC663614 /* AlbumListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListView.swift; sourceTree = "<group>"; };
+		66847AB50426D407ED657416 /* TrackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStore.swift; sourceTree = "<group>"; };
+		6A06649924CF6FF5735419F3 /* ArtistListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListView.swift; sourceTree = "<group>"; };
+		6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		7C049B73D51CC7720B8B7AC1 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
+		901FEE2A427540C654BDED09 /* LibraryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryModels.swift; sourceTree = "<group>"; };
+		92045EE011A1FD2753509703 /* StreamvaultWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamvaultWatchApp.swift; sourceTree = "<group>"; };
+		957FCC1CAFC951BE37AE8525 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		9CAACCEDBA663FF228DB7F2A /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		A488F422B2BD6334681022F8 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		A6A77C1457CD4B6E7F86323E /* PlaybackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
+		AD19DDBCBDDC97C6D96AC438 /* StreamvaultWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamvaultWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD67AA41C2FAD93575B470B4 /* StreamvaultWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamvaultWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3798A5CB70A5EFA09F4E53A /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
+		CE84955DFB236FD4A0C45803 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D72093AC6954CD8FFD05F59F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		E73E51D87F204FEB173B11E8 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		FD5DD117F63E56B764A1D23A /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
+		FF8526BADB5D7C726BB8424C /* InMemoryKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryKeychain.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0C5B0D950BCBB95A362C0FC7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE84955DFB236FD4A0C45803 /* ContentView.swift */,
+				92045EE011A1FD2753509703 /* StreamvaultWatchApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		284692A24E47D1264763B40D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A488F422B2BD6334681022F8 /* AuthView.swift */,
+				141E095A5263A6EBE07F3FA8 /* AuthViewModel.swift */,
+				FD5DD117F63E56B764A1D23A /* TokenRepository.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		39F8AC16B559F8E352F8ADBE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A29A9859EF30FC809BF8A71B /* API */,
+				D9573A4152013C1958EBF06C /* Keychain */,
+				8B917B099BA2C7C5EB13B988 /* Storage */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3FD9FC5DEBF306AC2EAC7B09 = {
+			isa = PBXGroup;
+			children = (
+				D96576C6F5955A04592D6927 /* StreamvaultWatch */,
+				4ECBD6C2BC59931977D4FDBE /* StreamvaultWatchTests */,
+				822F19FFDA81EC7FDCF0187A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4ECBD6C2BC59931977D4FDBE /* StreamvaultWatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8C34464935EA7A7CB1656E7 /* API */,
+				F5B4F8192C3F677981E188C0 /* Auth */,
+				61F69BC30B5D055A59FBF4C8 /* Helpers */,
+			);
+			path = StreamvaultWatchTests;
+			sourceTree = "<group>";
+		};
+		61F69BC30B5D055A59FBF4C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FF8526BADB5D7C726BB8424C /* InMemoryKeychain.swift */,
+				6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		702CEF1BF0C7F1BAB0476527 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				4DA2D265819C8B4D7312C5D7 /* SyncManager.swift */,
+				7C049B73D51CC7720B8B7AC1 /* SyncView.swift */,
+				2B95D7D2C59F076EA828BD18 /* SyncViewModel.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		822F19FFDA81EC7FDCF0187A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD67AA41C2FAD93575B470B4 /* StreamvaultWatch.app */,
+				AD19DDBCBDDC97C6D96AC438 /* StreamvaultWatchTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8B917B099BA2C7C5EB13B988 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				66847AB50426D407ED657416 /* TrackStore.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		A21F0FB715475EEE448E0CC3 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				A6A77C1457CD4B6E7F86323E /* PlaybackManager.swift */,
+				957FCC1CAFC951BE37AE8525 /* PlayerView.swift */,
+				9CAACCEDBA663FF228DB7F2A /* PlayerViewModel.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		A29A9859EF30FC809BF8A71B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D72093AC6954CD8FFD05F59F /* APIClient.swift */,
+				D411CC967180F863C64CFAAF /* Models */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D411CC967180F863C64CFAAF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1F97E548F336ADACE11C1DF1 /* AuthModels.swift */,
+				901FEE2A427540C654BDED09 /* LibraryModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D9542BF88B0995A020591AB7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5CF48C8609A2E0E5BC663614 /* AlbumListView.swift */,
+				6A06649924CF6FF5735419F3 /* ArtistListView.swift */,
+				2135EE216956EEB993ED1AB5 /* LibraryViewModel.swift */,
+				B3798A5CB70A5EFA09F4E53A /* TrackListView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		D9573A4152013C1958EBF06C /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				E73E51D87F204FEB173B11E8 /* KeychainStorage.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		D96576C6F5955A04592D6927 /* StreamvaultWatch */ = {
+			isa = PBXGroup;
+			children = (
+				1A0BEA56D46A0FDD6EB1F41A /* Info.plist */,
+				0C5B0D950BCBB95A362C0FC7 /* App */,
+				284692A24E47D1264763B40D /* Auth */,
+				39F8AC16B559F8E352F8ADBE /* Data */,
+				D9542BF88B0995A020591AB7 /* Library */,
+				A21F0FB715475EEE448E0CC3 /* Player */,
+				702CEF1BF0C7F1BAB0476527 /* Sync */,
+			);
+			path = StreamvaultWatch;
+			sourceTree = "<group>";
+		};
+		F5B4F8192C3F677981E188C0 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1E459397E94B238C37120F49 /* AuthViewModelTests.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F8C34464935EA7A7CB1656E7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1790DDC0B52304DAFEEF72C2 /* APIClientTests.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		191CF1F9B818C95ED6211D42 /* StreamvaultWatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 002ABEDA37BD60FC8D542E42 /* Build configuration list for PBXNativeTarget "StreamvaultWatchTests" */;
+			buildPhases = (
+				6109E31DBDC8680E9206DD1E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4935190EEEAD6494141B1C4F /* PBXTargetDependency */,
+			);
+			name = StreamvaultWatchTests;
+			packageProductDependencies = (
+			);
+			productName = StreamvaultWatchTests;
+			productReference = AD19DDBCBDDC97C6D96AC438 /* StreamvaultWatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A61D887E41F948C82C011CA3 /* StreamvaultWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E704829D7F330754852B8D21 /* Build configuration list for PBXNativeTarget "StreamvaultWatch" */;
+			buildPhases = (
+				63B1B6DF214EE8F9464FF047 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StreamvaultWatch;
+			packageProductDependencies = (
+			);
+			productName = StreamvaultWatch;
+			productReference = AD67AA41C2FAD93575B470B4 /* StreamvaultWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2BA5209EEF773A97F7F74C65 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = A5C488E6380B1F99B142403C /* Build configuration list for PBXProject "StreamvaultWatch" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3FD9FC5DEBF306AC2EAC7B09;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 822F19FFDA81EC7FDCF0187A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A61D887E41F948C82C011CA3 /* StreamvaultWatch */,
+				191CF1F9B818C95ED6211D42 /* StreamvaultWatchTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6109E31DBDC8680E9206DD1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C0D6D1E5197DB38F5B08E61 /* APIClientTests.swift in Sources */,
+				91350958CDA6588988F1B8CB /* AuthViewModelTests.swift in Sources */,
+				358F3371639916F42763169C /* InMemoryKeychain.swift in Sources */,
+				C8A2FE537C1C76CC3195B365 /* MockURLProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63B1B6DF214EE8F9464FF047 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4A1D626C54C57E123062810 /* APIClient.swift in Sources */,
+				A26D4D5B8D343346DAA85328 /* AlbumListView.swift in Sources */,
+				6BF9058BB88BA03D8BFA2BEE /* ArtistListView.swift in Sources */,
+				7BF8E3C09CD1340EF4F12002 /* AuthModels.swift in Sources */,
+				57621DC2642FAF1B77EE3616 /* AuthView.swift in Sources */,
+				07A5B01A7194942A05C4A89A /* AuthViewModel.swift in Sources */,
+				E9F440E6AE6BBC0B62F47A53 /* ContentView.swift in Sources */,
+				E5610059B8A6FB99DBB5F729 /* KeychainStorage.swift in Sources */,
+				954DB758EE3E5098AA764D10 /* LibraryModels.swift in Sources */,
+				1D016B829566C496559065CC /* LibraryViewModel.swift in Sources */,
+				EF13A5B6447E0EC445C93579 /* PlaybackManager.swift in Sources */,
+				1A8606EA629B9E26147D0FAD /* PlayerView.swift in Sources */,
+				888731F01FC3D1FBB6A6156F /* PlayerViewModel.swift in Sources */,
+				BBB8E9880D5E171381C9248A /* StreamvaultWatchApp.swift in Sources */,
+				09A2E970990CE7E8DE4F4476 /* SyncManager.swift in Sources */,
+				15FAF967C3316909F0BBE40B /* SyncView.swift in Sources */,
+				51661693146F0C67EA42EAB6 /* SyncViewModel.swift in Sources */,
+				73C66B3053DE8FBD3C1FF960 /* TokenRepository.swift in Sources */,
+				F73313CFCFFCD81BFD5C47F5 /* TrackListView.swift in Sources */,
+				928DF0CDB3C07E8923E27A17 /* TrackStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4935190EEEAD6494141B1C4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A61D887E41F948C82C011CA3 /* StreamvaultWatch */;
+			targetProxy = 257E93CD8016CBFAD38C96BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3A39AD17A5C4D16236CAD471 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.streamvault.watch.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreamvaultWatch.app/StreamvaultWatch";
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		442792B07A090568858E00FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6DE8FED86ABD12C5BC081C93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A45CAE2C5D8AEA90E0FFDD9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.streamvault.watch.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreamvaultWatch.app/StreamvaultWatch";
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		C5632D013B082DEABABA0BB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = StreamvaultWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = io.streamvault.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		F76D934D2106F4D1189CCDE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = StreamvaultWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = io.streamvault.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		002ABEDA37BD60FC8D542E42 /* Build configuration list for PBXNativeTarget "StreamvaultWatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A39AD17A5C4D16236CAD471 /* Debug */,
+				A45CAE2C5D8AEA90E0FFDD9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A5C488E6380B1F99B142403C /* Build configuration list for PBXProject "StreamvaultWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE8FED86ABD12C5BC081C93 /* Debug */,
+				442792B07A090568858E00FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E704829D7F330754852B8D21 /* Build configuration list for PBXNativeTarget "StreamvaultWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F76D934D2106F4D1189CCDE8 /* Debug */,
+				C5632D013B082DEABABA0BB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2BA5209EEF773A97F7F74C65 /* Project object */;
+}
