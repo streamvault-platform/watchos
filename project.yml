@@ -55,6 +55,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: io.streamvault.watch.tests
         SWIFT_VERSION: "5.10"
         WATCHOS_DEPLOYMENT_TARGET: "9.0"
+        GENERATE_INFOPLIST_FILE: "YES"
 
 schemes:
   StreamvaultWatch:

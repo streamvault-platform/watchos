@@ -26,7 +26,6 @@
 		A26D4D5B8D343346DAA85328 /* AlbumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF48C8609A2E0E5BC663614 /* AlbumListView.swift */; };
 		BBB8E9880D5E171381C9248A /* StreamvaultWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92045EE011A1FD2753509703 /* StreamvaultWatchApp.swift */; };
 		C4A1D626C54C57E123062810 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72093AC6954CD8FFD05F59F /* APIClient.swift */; };
-		C8A2FE537C1C76CC3195B365 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */; };
 		E5610059B8A6FB99DBB5F729 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E51D87F204FEB173B11E8 /* KeychainStorage.swift */; };
 		E9F440E6AE6BBC0B62F47A53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84955DFB236FD4A0C45803 /* ContentView.swift */; };
 		EF13A5B6447E0EC445C93579 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A77C1457CD4B6E7F86323E /* PlaybackManager.swift */; };
@@ -55,7 +54,6 @@
 		5CF48C8609A2E0E5BC663614 /* AlbumListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListView.swift; sourceTree = "<group>"; };
 		66847AB50426D407ED657416 /* TrackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStore.swift; sourceTree = "<group>"; };
 		6A06649924CF6FF5735419F3 /* ArtistListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListView.swift; sourceTree = "<group>"; };
-		6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		7C049B73D51CC7720B8B7AC1 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
 		901FEE2A427540C654BDED09 /* LibraryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryModels.swift; sourceTree = "<group>"; };
 		92045EE011A1FD2753509703 /* StreamvaultWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamvaultWatchApp.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				FF8526BADB5D7C726BB8424C /* InMemoryKeychain.swift */,
-				6CA84FDAB1B1A22CFA005A1C /* MockURLProtocol.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -312,7 +309,6 @@
 				9C0D6D1E5197DB38F5B08E61 /* APIClientTests.swift in Sources */,
 				91350958CDA6588988F1B8CB /* AuthViewModelTests.swift in Sources */,
 				358F3371639916F42763169C /* InMemoryKeychain.swift in Sources */,
-				C8A2FE537C1C76CC3195B365 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -5,6 +5,7 @@ final class APIClientTests: XCTestCase {
     private var keychain: InMemoryKeychain!
     private var tokenRepository: TokenRepository!
     private var client: APIClient!
+    private var requestHandler: ((URLRequest) throws -> (Data, URLResponse))?
 
     override func setUp() {
         super.setUp()
@@ -13,17 +14,18 @@ final class APIClientTests: XCTestCase {
             keychain: keychain,
             userDefaults: UserDefaults(suiteName: UUID().uuidString)!
         )
-        MockURLProtocol.requestHandler = nil
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        client = APIClient(tokenRepository: tokenRepository, session: URLSession(configuration: config))
+        requestHandler = nil
+        client = APIClient(tokenRepository: tokenRepository) { [weak self] request in
+            guard let handler = self?.requestHandler else { throw URLError(.unknown) }
+            return try handler(request)
+        }
     }
 
     // MARK: - Request shape
 
     func test_login_sendsPostToCorrectURL() async throws {
         var captured: URLRequest?
-        MockURLProtocol.requestHandler = { req in
+        requestHandler = { req in
             captured = req
             return try self.successResponse(for: req, body: TokenResponse(accessToken: "a", refreshToken: "r"))
         }
@@ -37,7 +39,7 @@ final class APIClientTests: XCTestCase {
 
     func test_login_encodesCredentialsInBody() async throws {
         var capturedBody: Data?
-        MockURLProtocol.requestHandler = { req in
+        requestHandler = { req in
             capturedBody = req.httpBody
             return try self.successResponse(for: req, body: TokenResponse(accessToken: "a", refreshToken: "r"))
         }
@@ -52,7 +54,7 @@ final class APIClientTests: XCTestCase {
     // MARK: - Response decoding
 
     func test_login_decodesTokenResponse() async throws {
-        MockURLProtocol.requestHandler = { req in
+        requestHandler = { req in
             try self.successResponse(for: req, body: TokenResponse(accessToken: "access", refreshToken: "refresh"))
         }
 
@@ -65,9 +67,9 @@ final class APIClientTests: XCTestCase {
     // MARK: - Error handling
 
     func test_login_throws_unauthorized_on401() async {
-        MockURLProtocol.requestHandler = { req in
+        requestHandler = { req in
             let http = HTTPURLResponse(url: req.url!, statusCode: 401, httpVersion: nil, headerFields: nil)!
-            return (http, Data())
+            return (Data(), http)
         }
 
         await assertThrows(APIError.unauthorized) {
@@ -76,9 +78,9 @@ final class APIClientTests: XCTestCase {
     }
 
     func test_login_throws_httpError_on500() async {
-        MockURLProtocol.requestHandler = { req in
+        requestHandler = { req in
             let http = HTTPURLResponse(url: req.url!, statusCode: 500, httpVersion: nil, headerFields: nil)!
-            return (http, Data())
+            return (Data(), http)
         }
 
         await assertThrows(APIError.httpError(500)) {
@@ -87,7 +89,7 @@ final class APIClientTests: XCTestCase {
     }
 
     func test_login_throws_networkError_onConnectionFailure() async {
-        MockURLProtocol.requestHandler = { _ in throw URLError(.notConnectedToInternet) }
+        requestHandler = { _ in throw URLError(.notConnectedToInternet) }
 
         do {
             _ = try await client.login(serverUrl: "http://localhost:8080", username: "u", password: "p")
@@ -107,10 +109,10 @@ final class APIClientTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func successResponse<T: Encodable>(for request: URLRequest, body: T) throws -> (HTTPURLResponse, Data) {
+    private func successResponse<T: Encodable>(for request: URLRequest, body: T) throws -> (Data, URLResponse) {
         let data = try JSONEncoder().encode(body)
         let http = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        return (http, data)
+        return (data, http)
     }
 
     private func assertThrows<E: Error & Equatable>(_ expected: E, block: () async throws -> Void) async {
@@ -138,6 +140,3 @@ extension APIError: Equatable {
         }
     }
 }
-
-// LoginRequest needs Decodable for body inspection in tests
-extension LoginRequest: Decodable {}

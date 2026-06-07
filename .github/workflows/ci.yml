@@ -34,7 +34,7 @@ jobs:
           xcodebuild build \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 9 (45mm)' \
+            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 10 (46mm)' \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
 
@@ -65,7 +65,7 @@ jobs:
           xcodebuild test \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 9 (45mm)' \
+            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 10 (46mm)' \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty --report junit --output TestResults/junit.xml

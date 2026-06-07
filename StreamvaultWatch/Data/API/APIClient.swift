@@ -20,11 +20,16 @@ enum APIError: LocalizedError {
 
 final class APIClient {
     private let tokenRepository: TokenRepository
-    private let session: URLSession
+    private let performDataTask: (URLRequest) async throws -> (Data, URLResponse)
 
     init(tokenRepository: TokenRepository, session: URLSession = .shared) {
         self.tokenRepository = tokenRepository
-        self.session = session
+        self.performDataTask = { try await session.data(for: $0) }
+    }
+
+    init(tokenRepository: TokenRepository, dataTask: @escaping (URLRequest) async throws -> (Data, URLResponse)) {
+        self.tokenRepository = tokenRepository
+        self.performDataTask = dataTask
     }
 
     // MARK: - Auth
@@ -55,7 +60,7 @@ final class APIClient {
         let data: Data
         let response: URLResponse
         do {
-            (data, response) = try await session.data(for: request)
+            (data, response) = try await performDataTask(request)
         } catch {
             throw APIError.networkError(error)
         }

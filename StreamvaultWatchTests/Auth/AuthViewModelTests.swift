@@ -7,6 +7,7 @@ final class AuthViewModelTests: XCTestCase {
     private var tokenRepository: TokenRepository!
     private var apiClient: APIClient!
     private var vm: AuthViewModel!
+    private var requestHandler: ((URLRequest) throws -> (Data, URLResponse))?
 
     override func setUp() {
         super.setUp()
@@ -15,10 +16,11 @@ final class AuthViewModelTests: XCTestCase {
             keychain: keychain,
             userDefaults: UserDefaults(suiteName: UUID().uuidString)!
         )
-        MockURLProtocol.requestHandler = nil
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        apiClient = APIClient(tokenRepository: tokenRepository, session: URLSession(configuration: config))
+        requestHandler = nil
+        apiClient = APIClient(tokenRepository: tokenRepository) { [weak self] request in
+            guard let handler = self?.requestHandler else { throw URLError(.unknown) }
+            return try handler(request)
+        }
         vm = AuthViewModel(tokenRepository: tokenRepository, apiClient: apiClient)
     }
 
@@ -80,9 +82,9 @@ final class AuthViewModelTests: XCTestCase {
     // MARK: - Errors
 
     func test_login_unauthorized_setsError() async {
-        MockURLProtocol.requestHandler = { request in
+        requestHandler = { request in
             let http = HTTPURLResponse(url: request.url!, statusCode: 401, httpVersion: nil, headerFields: nil)!
-            return (http, Data())
+            return (Data(), http)
         }
         vm.serverUrlInput = "http://localhost:8080"
         vm.username = "alice"
@@ -95,7 +97,7 @@ final class AuthViewModelTests: XCTestCase {
     }
 
     func test_login_networkError_setsError() async {
-        MockURLProtocol.requestHandler = { _ in throw URLError(.notConnectedToInternet) }
+        requestHandler = { _ in throw URLError(.notConnectedToInternet) }
         vm.serverUrlInput = "http://localhost:8080"
         vm.username = "alice"
         vm.password = "s3cr3t"
@@ -107,9 +109,9 @@ final class AuthViewModelTests: XCTestCase {
     }
 
     func test_login_serverError_setsError() async {
-        MockURLProtocol.requestHandler = { request in
+        requestHandler = { request in
             let http = HTTPURLResponse(url: request.url!, statusCode: 500, httpVersion: nil, headerFields: nil)!
-            return (http, Data())
+            return (Data(), http)
         }
         vm.serverUrlInput = "http://localhost:8080"
         vm.username = "alice"
@@ -163,10 +165,10 @@ final class AuthViewModelTests: XCTestCase {
 
     private func mockSuccess(accessToken: String, refreshToken: String) {
         let response = TokenResponse(accessToken: accessToken, refreshToken: refreshToken)
-        MockURLProtocol.requestHandler = { request in
+        requestHandler = { request in
             let data = try JSONEncoder().encode(response)
             let http = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return (http, data)
+            return (data, http)
         }
     }
 }
