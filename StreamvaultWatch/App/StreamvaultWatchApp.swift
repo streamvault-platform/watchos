@@ -13,7 +13,7 @@ struct StreamvaultWatchApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(apiClient: apiClient)
+            ContentView()
                 .environmentObject(tokenRepository)
         }
     }

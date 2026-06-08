@@ -1,9 +1,8 @@
 import SwiftUI
 
-/// Auth gate. Reads from Keychain on init — no network call required.
+/// Auth gate. Reads from shared App Group storage on init — no network call required.
 struct ContentView: View {
     @EnvironmentObject var tokenRepository: TokenRepository
-    let apiClient: APIClient
 
     var body: some View {
         if tokenRepository.isAuthenticated {
@@ -11,7 +10,7 @@ struct ContentView: View {
                 ArtistListView()
             }
         } else {
-            AuthView(tokenRepository: tokenRepository, apiClient: apiClient)
+            WaitingForPhoneView()
         }
     }
 }

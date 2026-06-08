@@ -27,6 +27,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.streamvault.watch
+        CODE_SIGN_ENTITLEMENTS: StreamvaultWatch/StreamvaultWatch.entitlements
         SWIFT_VERSION: "5.10"
         TARGETED_DEVICE_FAMILY: "4"
         WATCHOS_DEPLOYMENT_TARGET: "9.0"

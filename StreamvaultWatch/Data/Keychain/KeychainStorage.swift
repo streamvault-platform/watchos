@@ -9,19 +9,22 @@ protocol KeychainStorage {
 
 final class SystemKeychain: KeychainStorage {
     private let service: String
+    private let accessGroup: String?
 
-    init(service: String) {
+    init(service: String, accessGroup: String? = nil) {
         self.service = service
+        self.accessGroup = accessGroup
     }
 
     func read(account: String) -> String? {
-        let query: [CFString: Any] = [
+        var query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecReturnData: true,
             kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock,
         ]
+        if let group = accessGroup { query[kSecAttrAccessGroup] = group }
         var result: AnyObject?
         guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
               let data = result as? Data
@@ -32,22 +35,24 @@ final class SystemKeychain: KeychainStorage {
     func write(account: String, value: String) {
         guard let data = value.data(using: .utf8) else { return }
         delete(account: account)
-        let item: [CFString: Any] = [
+        var item: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecValueData: data,
             kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock,
         ]
+        if let group = accessGroup { item[kSecAttrAccessGroup] = group }
         SecItemAdd(item as CFDictionary, nil)
     }
 
     func delete(account: String) {
-        let query: [CFString: Any] = [
+        var query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
         ]
+        if let group = accessGroup { query[kSecAttrAccessGroup] = group }
         SecItemDelete(query as CFDictionary)
     }
 }

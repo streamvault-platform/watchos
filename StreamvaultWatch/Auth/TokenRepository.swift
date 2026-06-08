@@ -12,8 +12,11 @@ final class TokenRepository: ObservableObject {
     private let userDefaults: UserDefaults
 
     init(
-        keychain: KeychainStorage = SystemKeychain(service: "io.streamvault.watch"),
-        userDefaults: UserDefaults = .standard
+        keychain: KeychainStorage = SystemKeychain(
+            service: "io.streamvault.watch",
+            accessGroup: "group.io.streamvault"
+        ),
+        userDefaults: UserDefaults = UserDefaults(suiteName: "group.io.streamvault") ?? .standard
     ) {
         self.keychain = keychain
         self.userDefaults = userDefaults
