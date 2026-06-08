@@ -7,6 +7,9 @@ struct StreamvaultWatchApp: App {
 
     init() {
         let repo = TokenRepository()
+        #if DEBUG
+        DebugConfigLoader.apply(to: repo)
+        #endif
         _tokenRepository = StateObject(wrappedValue: repo)
         apiClient = APIClient(tokenRepository: repo)
     }

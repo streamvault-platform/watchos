@@ -32,19 +32,6 @@ final class APIClient {
         self.performDataTask = dataTask
     }
 
-    // MARK: - Auth
-
-    func login(serverUrl: String, username: String, password: String) async throws -> TokenResponse {
-        guard let url = URL(string: "\(serverUrl)/api/auth/login") else { throw APIError.invalidURL }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(LoginRequest(username: username, password: password))
-        return try await perform(request)
-    }
-
-    // MARK: - Internals
-
     func get<T: Decodable>(_ path: String) async throws -> T {
         guard let base = tokenRepository.serverUrl,
               let url = URL(string: "\(base)\(path)")
