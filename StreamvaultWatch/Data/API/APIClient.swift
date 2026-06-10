@@ -1,6 +1,6 @@
 import Foundation
 
-enum APIError: LocalizedError {
+enum APIError: LocalizedError, Equatable {
     case unauthorized
     case httpError(Int)
     case decodingError(Error)
@@ -14,6 +14,17 @@ enum APIError: LocalizedError {
         case .decodingError: return "Unexpected server response"
         case .networkError: return "Check your Wi-Fi connection"
         case .invalidURL: return "Invalid server URL"
+        }
+    }
+
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
+        switch (lhs, rhs) {
+        case (.unauthorized, .unauthorized): return true
+        case (.invalidURL, .invalidURL): return true
+        case (.httpError(let a), .httpError(let b)): return a == b
+        case (.networkError, .networkError): return true
+        case (.decodingError, .decodingError): return true
+        default: return false
         }
     }
 }
@@ -31,19 +42,6 @@ final class APIClient {
         self.tokenRepository = tokenRepository
         self.performDataTask = dataTask
     }
-
-    // MARK: - Auth
-
-    func login(serverUrl: String, username: String, password: String) async throws -> TokenResponse {
-        guard let url = URL(string: "\(serverUrl)/api/auth/login") else { throw APIError.invalidURL }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(LoginRequest(username: username, password: password))
-        return try await perform(request)
-    }
-
-    // MARK: - Internals
 
     func get<T: Decodable>(_ path: String) async throws -> T {
         guard let base = tokenRepository.serverUrl,
