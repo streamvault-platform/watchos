@@ -16,7 +16,7 @@ jobs:
 
       - name: Select Xcode
         run: |
-          XCODE=$(ls /Applications | grep "^Xcode_16" | sort -rV | head -1)
+          XCODE=$(ls /Applications | grep "^Xcode_26" | sort -rV | head -1)
           sudo xcode-select -s "/Applications/$XCODE/Contents/Developer"
           xcodebuild -version
 
@@ -34,7 +34,7 @@ jobs:
           xcodebuild build \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 10 (46mm)' \
+            -destination 'platform=watchOS Simulator,OS=26.2,name=Apple Watch Series 10 (46mm)' \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
 
@@ -48,7 +48,7 @@ jobs:
 
       - name: Select Xcode
         run: |
-          XCODE=$(ls /Applications | grep "^Xcode_16" | sort -rV | head -1)
+          XCODE=$(ls /Applications | grep "^Xcode_26" | sort -rV | head -1)
           sudo xcode-select -s "/Applications/$XCODE/Contents/Developer"
 
       - name: Install dependencies
@@ -65,7 +65,7 @@ jobs:
           xcodebuild test \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=latest,name=Apple Watch Series 10 (46mm)' \
+            -destination 'platform=watchOS Simulator,OS=26.2,name=Apple Watch Series 10 (46mm)' \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty --report junit --output TestResults/junit.xml
