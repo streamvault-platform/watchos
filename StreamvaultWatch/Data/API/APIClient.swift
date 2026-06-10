@@ -16,6 +16,17 @@ enum APIError: LocalizedError, Equatable {
         case .invalidURL: return "Invalid server URL"
         }
     }
+
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
+        switch (lhs, rhs) {
+        case (.unauthorized, .unauthorized): return true
+        case (.invalidURL, .invalidURL): return true
+        case (.httpError(let a), .httpError(let b)): return a == b
+        case (.networkError, .networkError): return true
+        case (.decodingError, .decodingError): return true
+        default: return false
+        }
+    }
 }
 
 final class APIClient {
