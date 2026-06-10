@@ -14,6 +14,11 @@ final class APIClientTests: XCTestCase {
             keychain: keychain,
             userDefaults: UserDefaults(suiteName: UUID().uuidString)!
         )
+        tokenRepository.save(
+            serverUrl: "http://localhost:8080",
+            accessToken: "test-token",
+            refreshToken: "test-refresh"
+        )
         requestHandler = nil
         client = APIClient(tokenRepository: tokenRepository) { [weak self] request in
             guard let handler = self?.requestHandler else { throw URLError(.unknown) }
@@ -23,76 +28,71 @@ final class APIClientTests: XCTestCase {
 
     // MARK: - Request shape
 
-    func test_login_sendsPostToCorrectURL() async throws {
+    func test_get_sendsRequestToCorrectURL() async throws {
         var captured: URLRequest?
         requestHandler = { req in
             captured = req
-            return try self.successResponse(for: req, body: TokenResponse(accessToken: "a", refreshToken: "r"))
+            return try self.successResponse(for: req, body: Stub(value: "ok"))
         }
 
-        _ = try await client.login(serverUrl: "http://localhost:8080", username: "alice", password: "s3cr3t")
+        let _: Stub = try await client.get("/api/tracks")
 
-        XCTAssertEqual(captured?.url?.absoluteString, "http://localhost:8080/api/auth/login")
-        XCTAssertEqual(captured?.httpMethod, "POST")
-        XCTAssertEqual(captured?.value(forHTTPHeaderField: "Content-Type"), "application/json")
+        XCTAssertEqual(captured?.url?.absoluteString, "http://localhost:8080/api/tracks")
     }
 
-    func test_login_encodesCredentialsInBody() async throws {
-        var capturedBody: Data?
+    func test_get_attachesAuthorizationHeader() async throws {
+        var captured: URLRequest?
         requestHandler = { req in
-            capturedBody = req.httpBody
-            return try self.successResponse(for: req, body: TokenResponse(accessToken: "a", refreshToken: "r"))
+            captured = req
+            return try self.successResponse(for: req, body: Stub(value: "ok"))
         }
 
-        _ = try await client.login(serverUrl: "http://localhost:8080", username: "alice", password: "s3cr3t")
+        let _: Stub = try await client.get("/api/tracks")
 
-        let decoded = try XCTUnwrap(capturedBody.flatMap { try? JSONDecoder().decode(LoginRequest.self, from: $0) })
-        XCTAssertEqual(decoded.username, "alice")
-        XCTAssertEqual(decoded.password, "s3cr3t")
+        XCTAssertEqual(captured?.value(forHTTPHeaderField: "Authorization"), "Bearer test-token")
     }
 
     // MARK: - Response decoding
 
-    func test_login_decodesTokenResponse() async throws {
+    func test_get_decodesResponse() async throws {
         requestHandler = { req in
-            try self.successResponse(for: req, body: TokenResponse(accessToken: "access", refreshToken: "refresh"))
+            try self.successResponse(for: req, body: Stub(value: "hello"))
         }
 
-        let result = try await client.login(serverUrl: "http://localhost:8080", username: "u", password: "p")
+        let result: Stub = try await client.get("/api/tracks")
 
-        XCTAssertEqual(result.accessToken, "access")
-        XCTAssertEqual(result.refreshToken, "refresh")
+        XCTAssertEqual(result.value, "hello")
     }
 
     // MARK: - Error handling
 
-    func test_login_throws_unauthorized_on401() async {
+    func test_get_throws_unauthorized_on401() async {
         requestHandler = { req in
             let http = HTTPURLResponse(url: req.url!, statusCode: 401, httpVersion: nil, headerFields: nil)!
             return (Data(), http)
         }
 
         await assertThrows(APIError.unauthorized) {
-            _ = try await self.client.login(serverUrl: "http://localhost:8080", username: "u", password: "p")
+            let _: Stub = try await self.client.get("/api/tracks")
         }
     }
 
-    func test_login_throws_httpError_on500() async {
+    func test_get_throws_httpError_on500() async {
         requestHandler = { req in
             let http = HTTPURLResponse(url: req.url!, statusCode: 500, httpVersion: nil, headerFields: nil)!
             return (Data(), http)
         }
 
         await assertThrows(APIError.httpError(500)) {
-            _ = try await self.client.login(serverUrl: "http://localhost:8080", username: "u", password: "p")
+            let _: Stub = try await self.client.get("/api/tracks")
         }
     }
 
-    func test_login_throws_networkError_onConnectionFailure() async {
+    func test_get_throws_networkError_onConnectionFailure() async {
         requestHandler = { _ in throw URLError(.notConnectedToInternet) }
 
         do {
-            _ = try await client.login(serverUrl: "http://localhost:8080", username: "u", password: "p")
+            let _: Stub = try await client.get("/api/tracks")
             XCTFail("Expected APIError.networkError")
         } catch APIError.networkError {
             // expected
@@ -101,13 +101,23 @@ final class APIClientTests: XCTestCase {
         }
     }
 
-    func test_login_throws_invalidURL_forMalformedServerUrl() async {
+    func test_get_throws_invalidURL_whenServerUrlNotSet() async {
+        let emptyRepo = TokenRepository(
+            keychain: InMemoryKeychain(),
+            userDefaults: UserDefaults(suiteName: UUID().uuidString)!
+        )
+        let clientWithoutServer = APIClient(tokenRepository: emptyRepo) { _ in
+            throw URLError(.unknown)
+        }
+
         await assertThrows(APIError.invalidURL) {
-            _ = try await self.client.login(serverUrl: "not a url ://", username: "u", password: "p")
+            let _: Stub = try await clientWithoutServer.get("/api/tracks")
         }
     }
 
     // MARK: - Helpers
+
+    private struct Stub: Codable { let value: String }
 
     private func successResponse<T: Encodable>(for request: URLRequest, body: T) throws -> (Data, URLResponse) {
         let data = try JSONEncoder().encode(body)
@@ -123,20 +133,6 @@ final class APIClientTests: XCTestCase {
             XCTAssertEqual(error, expected)
         } catch {
             XCTFail("Unexpected error: \(error)")
-        }
-    }
-}
-
-// APIError needs Equatable for assertThrows
-extension APIError: Equatable {
-    public static func == (lhs: APIError, rhs: APIError) -> Bool {
-        switch (lhs, rhs) {
-        case (.unauthorized, .unauthorized): return true
-        case (.invalidURL, .invalidURL): return true
-        case (.httpError(let a), .httpError(let b)): return a == b
-        case (.networkError, .networkError): return true
-        case (.decodingError, .decodingError): return true
-        default: return false
         }
     }
 }
