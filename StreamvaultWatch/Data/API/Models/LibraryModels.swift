@@ -1,24 +1,24 @@
 import Foundation
 
-struct Artist: Decodable, Identifiable, Hashable {
+struct Artist: Codable, Identifiable, Hashable {
     let id: String
     let name: String
 }
 
-struct Album: Decodable, Identifiable, Hashable {
+struct Album: Codable, Identifiable, Hashable {
     let id: String
     let title: String
     let artistName: String?
     let year: Int?
-    let coverArtUrl: String?
+    let coverUrl: String?
 }
 
-struct Track: Decodable, Identifiable, Hashable {
+struct Track: Codable, Identifiable, Hashable {
     let id: String
     let title: String
     let artistName: String?
     let albumTitle: String?
     let albumId: String?
-    let durationSeconds: Int?
+    let durationMs: Int?
     let trackNumber: Int?
 }
