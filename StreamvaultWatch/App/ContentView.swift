@@ -6,8 +6,11 @@ struct ContentView: View {
 
     var body: some View {
         if tokenRepository.isAuthenticated {
-            NavigationStack {
-                ArtistListView()
+            TabView {
+                NavigationStack {
+                    ArtistListView()
+                }
+                SyncView()
             }
         } else {
             WaitingForPhoneView()
