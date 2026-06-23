@@ -6,8 +6,8 @@ protocol AudioPlayer: AnyObject {
     func replaceCurrentItem(with item: AVPlayerItem?)
     func play()
     func pause()
-    func seek(to time: CMTime, completionHandler: @escaping (Bool) -> Void)
-    func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue?, using block: @escaping (CMTime) -> Void) -> Any
+    func seek(to time: CMTime, completionHandler: @escaping @Sendable (Bool) -> Void)
+    func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue?, using block: @escaping @Sendable (CMTime) -> Void) -> Any
     func removeTimeObserver(_ observer: Any)
 }
 

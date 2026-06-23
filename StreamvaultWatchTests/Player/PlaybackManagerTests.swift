@@ -7,9 +7,9 @@ import XCTest
 final class MockAudioPlayer: AudioPlayer {
     private(set) var rate: Float = 0
     private(set) var replaceItemCallCount = 0
-    private(set) var playCalled = false
-    private(set) var pauseCalled = false
-    private(set) var seekCalled = false
+    var playCalled = false
+    var pauseCalled = false
+    var seekCalled = false
     private(set) var lastSeekTime: CMTime?
     private var timeObserverBlock: ((CMTime) -> Void)?
 
@@ -27,13 +27,13 @@ final class MockAudioPlayer: AudioPlayer {
         rate = 0
     }
 
-    func seek(to time: CMTime, completionHandler: @escaping (Bool) -> Void) {
+    func seek(to time: CMTime, completionHandler: @escaping @Sendable (Bool) -> Void) {
         seekCalled = true
         lastSeekTime = time
         completionHandler(true)
     }
 
-    func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue?, using block: @escaping (CMTime) -> Void) -> Any {
+    func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue?, using block: @escaping @Sendable (CMTime) -> Void) -> Any {
         timeObserverBlock = block
         return NSObject()
     }
