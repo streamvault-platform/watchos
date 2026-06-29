@@ -154,5 +154,6 @@ final class PlaybackManager: ObservableObject {
 
     #if DEBUG
     func _simulateItemEnd() { skipNext() }
+    func _setDuration(_ seconds: TimeInterval) { duration = seconds }
     #endif
 }
