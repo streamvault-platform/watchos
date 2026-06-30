@@ -1,5 +1,6 @@
 import AVFoundation
 import Combine
+import MediaPlayer
 
 protocol AudioPlayer: AnyObject {
     var rate: Float { get }
@@ -28,18 +29,28 @@ final class PlaybackManager: ObservableObject {
     }
 
     private let player: AudioPlayer
-    // nonisolated(unsafe) lets deinit access the token without actor isolation warnings
+    private let mediaSession: SystemMediaSession
     nonisolated(unsafe) private var timeObserverToken: Any?
     private var itemEndObserver: NSObjectProtocol?
 
-    init(player: AudioPlayer = AVPlayer()) {
+    init(player: AudioPlayer = AVPlayer(), mediaSession: SystemMediaSession = LiveSystemMediaSession()) {
         self.player = player
+        self.mediaSession = mediaSession
+
         let interval = CMTime(seconds: 0.5, preferredTimescale: 600)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             MainActor.assumeIsolated {
-                self?.currentTime = time.seconds
+                guard let self else { return }
+                self.currentTime = time.seconds
+                self.updateNowPlayingInfo()
             }
         }
+
+        mediaSession.onPlay     { [weak self] in MainActor.assumeIsolated { self?.play() } }
+        mediaSession.onPause    { [weak self] in MainActor.assumeIsolated { self?.pause() } }
+        mediaSession.onNext     { [weak self] in MainActor.assumeIsolated { self?.skipNext() } }
+        mediaSession.onPrevious { [weak self] in MainActor.assumeIsolated { self?.skipPrevious() } }
+        mediaSession.onSeek     { [weak self] t  in MainActor.assumeIsolated { self?.seek(to: t) } }
     }
 
     deinit {
@@ -59,6 +70,7 @@ final class PlaybackManager: ObservableObject {
             currentIndex = nil
             player.replaceCurrentItem(with: nil)
             isPlaying = false
+            mediaSession.updateNowPlaying(nil)
             return
         }
         currentIndex = index
@@ -71,11 +83,13 @@ final class PlaybackManager: ObservableObject {
         guard currentIndex != nil else { return }
         player.play()
         isPlaying = true
+        updateNowPlayingInfo()
     }
 
     func pause() {
         player.pause()
         isPlaying = false
+        updateNowPlayingInfo()
     }
 
     func togglePlayPause() {
@@ -87,6 +101,7 @@ final class PlaybackManager: ObservableObject {
         player.seek(to: target) { [weak self] _ in
             MainActor.assumeIsolated {
                 self?.currentTime = time
+                self?.updateNowPlayingInfo()
             }
         }
     }
@@ -136,9 +151,7 @@ final class PlaybackManager: ObservableObject {
             object: item,
             queue: .main
         ) { [weak self] _ in
-            MainActor.assumeIsolated {
-                self?.skipNext()
-            }
+            MainActor.assumeIsolated { self?.skipNext() }
         }
 
         Task { [weak self] in
@@ -146,14 +159,39 @@ final class PlaybackManager: ObservableObject {
             if let secs = try? await item.asset.load(.duration).seconds,
                secs.isFinite, !secs.isNaN {
                 self.duration = secs
+                self.updateNowPlayingInfo()
             }
         }
+
+        updateNowPlayingInfo()
+    }
+
+    private func updateNowPlayingInfo() {
+        guard let track = currentTrack else {
+            mediaSession.updateNowPlaying(nil)
+            return
+        }
+        var info: [String: Any] = [
+            MPMediaItemPropertyTitle: track.title,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: currentTime,
+            MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
+        ]
+        if let artist = track.artistName {
+            info[MPMediaItemPropertyArtist] = artist
+        }
+        if duration > 0 {
+            info[MPMediaItemPropertyPlaybackDuration] = duration
+        }
+        mediaSession.updateNowPlaying(info)
     }
 
     // MARK: - Test hooks
 
     #if DEBUG
     func _simulateItemEnd() { skipNext() }
-    func _setDuration(_ seconds: TimeInterval) { duration = seconds }
+    func _setDuration(_ seconds: TimeInterval) {
+        duration = seconds
+        updateNowPlayingInfo()
+    }
     #endif
 }

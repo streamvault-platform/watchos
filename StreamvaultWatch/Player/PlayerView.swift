@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PlayerView: View {
     @EnvironmentObject private var playerVM: PlayerViewModel
+    @State private var crownValue: Double = 0
 
     var body: some View {
         VStack(spacing: 6) {
@@ -15,6 +16,23 @@ struct PlayerView: View {
         .padding(.vertical, 8)
         .navigationTitle("Now Playing")
         .navigationBarTitleDisplayMode(.inline)
+        .focusable()
+        .digitalCrownRotation(
+            $crownValue,
+            from: 0, through: 1, by: 0.005,
+            sensitivity: .medium,
+            isContinuous: false,
+            isHapticFeedbackEnabled: true
+        )
+        .onChange(of: crownValue) { new in
+            playerVM.seek(to: new)
+        }
+        .onAppear {
+            crownValue = playerVM.seekProgress
+        }
+        .onChange(of: playerVM.currentTrack?.id) { _ in
+            crownValue = playerVM.seekProgress
+        }
     }
 
     // MARK: - Subviews
