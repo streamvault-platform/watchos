@@ -28,13 +28,19 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Detect watchOS simulator
+        run: |
+          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'Watch' in rt for s in d[rt] if s.get('isAvailable',False)))")
+          echo "SIM_ID=$SIM_ID" >> "$GITHUB_ENV"
+          echo "Using simulator $SIM_ID"
+
       - name: Compile
         run: |
           set -o pipefail
           xcodebuild build \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=26.2,name=Apple Watch Series 10 (46mm)' \
+            -destination "platform=watchOS Simulator,id=$SIM_ID" \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
 
@@ -59,13 +65,19 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Detect watchOS simulator
+        run: |
+          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'Watch' in rt for s in d[rt] if s.get('isAvailable',False)))")
+          echo "SIM_ID=$SIM_ID" >> "$GITHUB_ENV"
+          echo "Using simulator $SIM_ID"
+
       - name: Run tests
         run: |
           set -o pipefail
           xcodebuild test \
             -project StreamvaultWatch.xcodeproj \
             -scheme StreamvaultWatch \
-            -destination 'platform=watchOS Simulator,OS=26.2,name=Apple Watch Series 10 (46mm)' \
+            -destination "platform=watchOS Simulator,id=$SIM_ID" \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty --report junit --output TestResults/junit.xml
