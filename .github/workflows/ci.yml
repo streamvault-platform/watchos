@@ -30,7 +30,7 @@ jobs:
 
       - name: Detect watchOS simulator
         run: |
-          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'Watch' in rt for s in d[rt] if s.get('isAvailable',False)))")
+          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'watchOS' in rt for s in d[rt] if s.get('isAvailable',False)))")
           echo "SIM_ID=$SIM_ID" >> "$GITHUB_ENV"
           echo "Using simulator $SIM_ID"
 
@@ -67,7 +67,7 @@ jobs:
 
       - name: Detect watchOS simulator
         run: |
-          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'Watch' in rt for s in d[rt] if s.get('isAvailable',False)))")
+          SIM_ID=$(xcrun simctl list devices available --json | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];print(next(s['udid'] for rt in sorted(d,reverse=True) if 'watchOS' in rt for s in d[rt] if s.get('isAvailable',False)))")
           echo "SIM_ID=$SIM_ID" >> "$GITHUB_ENV"
           echo "Using simulator $SIM_ID"
 
